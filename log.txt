@@ -1,0 +1,17 @@
+commit acfc8e24fdb5216a058a687af6c97deb341a2c4f
+Author: Wang Qun Feng <qunfengw@gmail.com>
+Date:   Fri May 13 19:58:32 2016 +0800
+
+    refactoring the script with methods, puts the statistics to a file
+
+commit eca2fbdb029e0ab13adae33cc6fc7be1700202d4
+Author: Wang Qun Feng <qunfengw@gmail.com>
+Date:   Fri May 13 18:33:18 2016 +0800
+
+    print the statistics to the console
+
+commit edebee221defabc702365ec7db4b00d0f9c43ffa
+Author: Wang Qun Feng <qunfengw@gmail.com>
+Date:   Thu May 12 15:01:03 2016 +0800
+
+    Initial commit
