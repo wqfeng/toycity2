@@ -54,23 +54,29 @@ def puts_products
     $report_file.puts item["title"]
     $report_file.puts "***************************"
 
-    full_price = Float(item['full-price'])
-    total_purchases = item['purchases'].length
-    total_sales = item['purchases'].map {|p| p['price']}.reduce(:+)
-    average_price = total_sales / total_purchases
-    discount = full_price - average_price
-    discount_percentage = (discount / full_price * 100).round(2)
-
-    $report_file.puts "Retail Price: $#{full_price}"
-    $report_file.puts "Total Purchases: #{total_purchases}"
-    $report_file.puts "Total Sales: $#{total_sales}"
-    $report_file.puts "Average Price: $#{average_price}"
-    $report_file.puts "Average Discount: $#{discount}"
-    $report_file.puts "Average Discount Percentage: #{discount_percentage}%"
+    statistics = caculate_product_statistics(item)
+    
+    $report_file.puts "Retail Price: $#{statistics[0]}"
+    $report_file.puts "Total Purchases: #{statistics[1]}"
+    $report_file.puts "Total Sales: $#{statistics[2]}"
+    $report_file.puts "Average Price: $#{statistics[3]}"
+    $report_file.puts "Average Discount: $#{statistics[4]}"
+    $report_file.puts "Average Discount Percentage: #{statistics[5]}%"
 
     $report_file.puts "***************************"
     $report_file.puts
   end
+end
+
+def caculate_product_statistics(product)
+  full_price = Float(product['full-price'])
+  total_purchases = product['purchases'].length
+  total_sales = product['purchases'].map {|p| p['price']}.reduce(:+)
+  average_price = total_sales / total_purchases
+  discount = full_price - average_price
+  discount_percentage = (discount / full_price * 100).round(2)
+
+  return full_price, total_purchases, total_sales, average_price, discount, discount_percentage
 end
 
 def puts_brand_header
@@ -94,15 +100,21 @@ def puts_brands
   products_by_brand.each do |k, v|
     $report_file.puts k
     $report_file.puts "***************************"
-    stock = v.map {|e| e['stock']}.reduce(:+)
-    average_price = (v.map {|e| Float(e['full-price'])}.reduce(:+) / v.length).round(2)
-    total_sales = v.map {|e| e['purchases'].map {|p| p['price']}.reduce(:+)}.reduce(:+).round(2)
 
+    stock, average_price, total_sales = caculate_brand_statistics(v)
     $report_file.puts "Number of Products: #{stock}"
     $report_file.puts "Average Product Price: $#{average_price}"
     $report_file.puts "Total Sales: $#{total_sales}"
     $report_file.puts
   end
+end
+
+def caculate_brand_statistics(product)
+  stock = product.map {|e| e['stock']}.reduce(:+)
+  average_price = (product.map {|e| Float(e['full-price'])}.reduce(:+) / product.length).round(2)
+  total_sales = product.map {|e| e['purchases'].map {|p| p['price']}.reduce(:+)}.reduce(:+).round(2)
+
+  return stock, average_price, total_sales
 end
 
 
