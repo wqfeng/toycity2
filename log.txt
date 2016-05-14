@@ -1,3 +1,15 @@
+commit cad0330503c3022137c48ad70b2fc4b44aca3478
+Author: Wang Qun Feng <qunfengw@gmail.com>
+Date:   Sat May 14 15:46:11 2016 +0800
+
+    refactoring: one method, one purpose
+
+commit 74cce0b682b5f9930d2a17f9b8d92f94a8f7c68b
+Author: Wang Qun Feng <qunfengw@gmail.com>
+Date:   Fri May 13 20:00:43 2016 +0800
+
+    generate the log and report, ready to review
+
 commit acfc8e24fdb5216a058a687af6c97deb341a2c4f
 Author: Wang Qun Feng <qunfengw@gmail.com>
 Date:   Fri May 13 19:58:32 2016 +0800
